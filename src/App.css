@@ -1,38 +1,31 @@
-.App {
-  text-align: center;
+.playground{
+    position: relative;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.snake-playground{
+    position: relative;
+    margin: 50px auto;
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.snake-part{
+    background-color: green;
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    border: 1px solid #fff;
+    z-index: 2;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.snake-food{
+    background-color: tomato;
+    position: absolute;
+    width: 2.5%;
+    height: 2.5%;
+    border: 1px solid #fff;
+    z-index: 1;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.score{
+    position: absolute;
+    left: 31.5%;
+    top: -5%;
 }
