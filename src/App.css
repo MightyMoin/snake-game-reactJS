@@ -1,43 +1,46 @@
 :root {
-    --box:32px;
+  --box: 32px;
 }
-.playground{
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
+.playground {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-.ground{
-    position: relative;   
+.ground {
+  position: relative;
 }
-.background{
-    margin:0 auto;
+.background {
+  margin: 0 auto;
 }
-.snake-playground{
-    position: relative;
-    width: 608px;
-    height: 608px;
-    margin: 0 auto;
+.snake-playground {
+  position: relative;
+  width: 608px;
+  height: 608px;
+  margin: 0 auto;
 }
-.snake-part{
-    background-color: green;
-    position: absolute;
-    width: var(--box);
-    height: var(--box);
-    border: 1px solid #fff;
-    z-index: 2;
+.snake-part {
+  background-color: green;
+  position: absolute;
+  width: var(--box);
+  height: var(--box);
+  border: 1px solid #fff;
+  z-index: 2;
 }
-.snake-food{
-    position: absolute;
-    width: var(--box);
-    height: var(--box);
-    z-index: 1;
+.snake-food {
+  position: absolute;
+  width: var(--box);
+  height: var(--box);
+  z-index: 1;
 }
-.score{
-    position: absolute;
-    
+.score {
+  position: absolute;
+  top: 3%;
+  left: 12%;
+  z-index: 10;
+  font-size: xx-large;
+  color: rgb(197, 31, 31);
 }
-.leaderboard{
-    width: 50%;
+.leaderboard {
+  width: 50%;
 }
