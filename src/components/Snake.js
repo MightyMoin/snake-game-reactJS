@@ -5,7 +5,7 @@ export default class Snake extends Component {
     return (
       <div>
         {this.props.snakeDots.map((dot, i) => {
-          const style = { top: `${dot[1]}%`, left: `${dot[0]}%` };
+          const style = { top: `${dot[1]}px`, left: `${dot[0]}px` };
           return <div className="snake-part" key={i} style={style}></div>;
         })}
       </div>
