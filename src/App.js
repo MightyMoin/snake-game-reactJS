@@ -14,7 +14,14 @@ const randomFood = () => {
   const y = Math.floor(Math.random() * (max - min + 1) + min) * box;
   return [x, y];
 };
-
+const collision = (head,array) =>{
+  for(let i=0;i<array.length;i++){
+      if(head[0] === array[i][0] && head[1] === array[i][1]){
+          return true;
+      }
+  }
+  return false;
+}
 // this is the initial state of the snake
 const initialState = {
   food: randomFood(),
@@ -25,7 +32,7 @@ const initialState = {
     [5 * box, 10 * box],
     [6 * box, 10 * box],
   ],
-  last: null,
+  last: 'RIGHT',
   score: 0,
   sound: null,
 };
@@ -132,11 +139,13 @@ class App extends Component {
   eatCheck() {
     let snake = [...this.state.snakeDots];
     let head = snake[snake.length - 1];
-    const food = this.state.food;
+    let food = this.state.food;
     if (head[0] === food[0] && head[1] === food[1]) {
       document.getElementsByClassName('eat')[0].play();
+      let foo = randomFood();
+      while(collision(foo,snake)) foo = randomFood();
       this.setState({
-        food: randomFood(),
+        food: foo,
         score: this.state.score + 1,
       });
       this.enlarge();
