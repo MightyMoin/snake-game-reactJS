@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Snake from './components/Snake';
 import Food from './components/Food';
+import { Provider } from './context';
+import LeaderBoard from './components/LeaderBoard';
 
+// a function that gives food at a random space
 const randomFood = () => {
   const size = 2.5;
   const min = 1,
@@ -11,6 +14,8 @@ const randomFood = () => {
   const y = Math.floor((Math.random() * (max - min + 1 + min)) / size) * size;
   return [x, y];
 };
+
+// this is the initial state of the snake
 const initialState = {
   food: randomFood(),
   direction: 'RIGHT',
@@ -26,16 +31,18 @@ const initialState = {
 class App extends Component {
   state = initialState;
 
+  // this runs after the document is ready
   componentDidMount() {
-    setInterval(this.snakeMovement, this.state.speed);
+    // setInterval(this.snakeMovement, this.state.speed);
     document.onkeydown = this.onDirection;
   }
+  // this runs if there is a change in state
   componentDidUpdate() {
     this.collapseCheck();
     this.borderCheck();
     this.eatCheck();
   }
-
+ // this triggers when an event on keyboard occurs
   onDirection = (e) => {
     e = e || window.event;
     switch (e.keyCode) {
@@ -55,7 +62,7 @@ class App extends Component {
         break;
     }
   };
-
+ //tells the snake to move in a particular directin
   snakeMovement = () => {
     let dots = [...this.state.snakeDots];
     let newhead = dots[dots.length - 1];
@@ -81,7 +88,7 @@ class App extends Component {
       snakeDots: dots,
     });
   };
-
+  // to enlarge snake
   enlarge() {
     let newSnake = [...this.state.snakeDots];
     newSnake.unshift([]);
@@ -89,7 +96,7 @@ class App extends Component {
       snakeDots: newSnake,
     });
   }
-
+  // to speedup snake after eating/ enlarging
   speedUpSnake() {
     if (this.state.speed > 10) {
       this.setState({
@@ -101,9 +108,7 @@ class App extends Component {
     let snake = [...this.state.snakeDots];
     let head = snake[snake.length - 1];
     const food = this.state.food;
-    console.log(food, head);
     if (head[0] === food[0] && head[1] === food[1]) {
-      console.log('ATE');
       this.setState({
         food: randomFood(),
         score: this.state.score + 1,
@@ -112,6 +117,7 @@ class App extends Component {
       this.speedUpSnake();
     }
   }
+  //if snake encounters itself
   collapseCheck() {
     let snake = [...this.state.snakeDots];
     let head = snake[snake.length - 1];
@@ -122,6 +128,7 @@ class App extends Component {
       }
     });
   }
+  //if snake encounters borders
   borderCheck() {
     let head = this.state.snakeDots[this.state.snakeDots.length - 1];
     if (head[0] >= 100 || head[1] < 0 || head[0] < 0 || head[1] >= 100)
@@ -134,16 +141,21 @@ class App extends Component {
   render() {
     const { snakeDots, food, score } = this.state;
     return (
-      <React.Fragment>
-        <div className="display-4 text-center">Snake Game</div>
-        <div className="playground">
-          <h5 className="score">Score : {score}</h5>
-          <div className="snake-playground bg-light p-1">
-            <Snake snakeDots={snakeDots}></Snake>
-            <Food food={food}></Food>
+      <Provider>
+        <React.Fragment>
+          <div className="display-4 text-center">Snake Game</div>
+          <div className="playground">
+            <div className="ground">
+              <h5 className="score">Score : {score}</h5>
+              <div className="snake-playground bg-light p-1 mt-4">
+                <Snake snakeDots={snakeDots}></Snake>
+                <Food food={food}></Food>
+              </div>
+            </div>
+            <LeaderBoard></LeaderBoard>
           </div>
-        </div>
-      </React.Fragment>
+        </React.Fragment>
+      </Provider>
     );
   }
 }

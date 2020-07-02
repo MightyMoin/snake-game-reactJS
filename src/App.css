@@ -1,9 +1,16 @@
 .playground{
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+}
+.ground{
+    position: relative;
+    
 }
 .snake-playground{
     position: relative;
-    margin: 50px auto;
     width: 500px;
     height: 500px;
     border: 2px solid black;
@@ -26,6 +33,8 @@
 }
 .score{
     position: absolute;
-    left: 31.5%;
-    top: -5%;
+    
+}
+.leaderboard{
+    width: 50%;
 }
