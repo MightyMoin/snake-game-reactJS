@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LeaderBoard from './components/LeaderBoard';
 
 const Context = React.createContext();
 
@@ -21,7 +22,36 @@ export class Provider extends Component {
         score: 50,
       },
     ],
+    dispatch: (action) => this.reducer(action),
   };
+
+  reducer = (action) => {
+    let { name, score } = action;
+    const before = this.state.LeaderBoard.filter((person) => {
+      return person.score >= score;
+    });
+    const after = this.state.LeaderBoard.filter((person) => {
+      return person.score <= score;
+    });
+    let i = before.length + 1;
+    after.map((person) => {
+      person.rank += 1;
+    });
+    const newPerson = {
+      rank: i,
+      name,
+      score,
+    };
+    before.push(newPerson);
+    after.forEach((person) => before.push(person));
+    this.setState((this.state.LeaderBoard = before));
+  };
+
+  test = this.state.dispatch({
+    name: 'moin',
+    score: 60,
+  });
+
   render() {
     return (
       <Context.Provider value={this.state}>
