@@ -15,6 +15,7 @@ const randomFood = () => {
   const y = Math.floor(Math.random() * (max - min + 1) + min) * box;
   return [x, y];
 };
+// this if for the food not to coincide with the body of snake
 const collision = (head, array) => {
   for (let i = 0; i < array.length; i++) {
     if (head[0] === array[i][0] && head[1] === array[i][1]) {
@@ -38,6 +39,7 @@ const initialState = {
   sound: null,
 };
 
+// flags to stop and restart game
 var intervalFlag = 0;
 var interval = null;
 var flag = 0;
@@ -48,28 +50,25 @@ class App extends Component {
 
   // this runs after the document is ready
   componentDidMount() {
-    var x = document.getElementsByClassName('popup')[0];
     interval = setInterval(this.snakeMovement, this.state.speed);
-
     document.onkeydown = this.onDirection;
   }
 
   shouldComponentUpdate() {
     if (intervalFlag === 1) {
-      if (flag == 0) {
+      if (flag === 0) {
         this.setState(initialState);
         flag = 1;
         inteflg = 0;
         this.stopInterval();
-
       }
       return false;
     } else {
       flag = 0;
-      if(inteflg === 0){
+      if (inteflg === 0) {
         this.setState(initialState);
-      interval = setInterval(this.snakeMovement, this.state.speed);
-      inteflg = 1;
+        interval = setInterval(this.snakeMovement, this.state.speed);
+        inteflg = 1;
       }
       return true;
     }
@@ -218,11 +217,10 @@ class App extends Component {
   restartGame() {
     console.log('fired');
     intervalFlag = 0;
-    // this.shouldComponentUpdate();
-    // this.setState(initialState);
   }
   render() {
     const { snakeDots, food, score } = this.state;
+    const rsGame = this.restartGame;
     return (
       <Provider>
         <React.Fragment>
@@ -264,9 +262,9 @@ class App extends Component {
             <source src={require('./audio/eat.mp3')} type="audio/mp3"></source>
           </audio>
           <Popup
-            score={this.state.score}
+            score={score}
             intervalFlag={intervalFlag}
-            rsGame={this.restartGame}
+            rsGame={rsGame}
           ></Popup>
         </React.Fragment>
       </Provider>

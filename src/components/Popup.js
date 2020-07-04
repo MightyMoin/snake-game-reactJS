@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Consumer } from '../context';
+import classnames from 'classnames';
 
 export default class Popup extends Component {
   state = {
     name: '',
     finalScore: 0,
+    nameError: {},
   };
 
   onFormSubmit = (dispatch, e) => {
     e.preventDefault();
 
     const { name, finalScore } = this.state;
+    if (name === '') {
+      this.setState({
+        nameError: { name: 'Name is required' },
+      });
+      return;
+    }
     const action = {
       name,
       score: finalScore,
@@ -20,6 +28,7 @@ export default class Popup extends Component {
     this.setState({
       name: '',
       finalScore: 0,
+      nameError: '',
     });
     this.props.rsGame();
   };
@@ -29,10 +38,14 @@ export default class Popup extends Component {
     if (score > this.state.finalScore) {
       this.setState({ finalScore: score });
     }
+    if (score < this.state.finalScore) {
+      this.setState({ finalScore: score });
+    }
   }
 
   render() {
-    const { name, finalScore } = this.state;
+    const { name, finalScore, nameError } = this.state;
+    const error = nameError.name;
     var { score, rsGame } = this.props;
     return (
       <div className="popup rounded">
@@ -52,14 +65,14 @@ export default class Popup extends Component {
               }}
             ></i>
           </div>
-          <div className="card-body">
+          <div className="card-body" style={{ height: '100%' }}>
             <Consumer>
               {(value) => {
                 const { LeaderBoard, dispatch } = value;
                 var len = LeaderBoard.length;
                 return (
                   <React.Fragment>
-                    {(len < 10 || LeaderBoard[len - 1] < finalScore) &&
+                    {(len <= 10 || LeaderBoard[len - 1] < finalScore) &&
                     score !== 0 ? (
                       <div>
                         <h4>You have made it to the LeaderBoard!</h4>
@@ -74,12 +87,21 @@ export default class Popup extends Component {
                           <input
                             name="name"
                             type="text"
-                            className="form-control form-control-lg mb-3"
+                            className={classnames(
+                              'form-control form-control-lg mb-3',
+                              {
+                                'is-invalid': error,
+                              }
+                            )}
                             value={name}
                             onChange={(e) => {
                               this.setState({ name: e.target.value });
                             }}
                           ></input>
+                          {error && (
+                            <div className="invalid-feedback">{error}</div>
+                          )}
+
                           <input
                             type="submit"
                             value="Submit"
@@ -90,14 +112,14 @@ export default class Popup extends Component {
                             }}
                           ></input>
                           <p>
-                            <strong>Note: </strong> After you close or Submit
-                            your details , first press 'W' and then 'D' to
-                            restart the Game{' '}
+                            <strong>Note: </strong> After you close this popup
+                            or Submit your details , first press 'W' and then
+                            'D' to restart the Game{' '}
                           </p>
                         </form>
                       </div>
                     ) : (
-                      <div>
+                      <div style={{ height: '120%' }}>
                         <h4>Score : {score}</h4>
                         <p>Try Again.</p>
                         <button
@@ -112,9 +134,9 @@ export default class Popup extends Component {
                           Click Here
                         </button>
                         <p>
-                          <strong>Note: </strong> After you close or pressed
-                          "Click Here" button , first press 'W' and then 'D' to
-                          restart the Game{' '}
+                          <strong>Note: </strong> After you close this popup or
+                          pressed "Click Here" button , first press 'W' and then
+                          'D' to restart the Game{' '}
                         </p>
                       </div>
                     )}

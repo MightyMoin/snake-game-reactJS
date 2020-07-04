@@ -50,7 +50,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 50%;
-  height: 50%;
+  min-height: 50%;
+  max-width: fit-content;
   background-color: #fff;
   z-index: 100;
   border: 1px solid black;

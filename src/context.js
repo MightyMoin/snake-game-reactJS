@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LeaderBoard from './components/LeaderBoard';
 
 const Context = React.createContext();
 
@@ -25,6 +24,7 @@ export class Provider extends Component {
     dispatch: (action) => this.reducer(action),
   };
 
+// reducer to add a person to the LeaderBoard
   reducer = (action) => {
     let { name, score } = action;
     const before = this.state.LeaderBoard.filter((person) => {
@@ -44,9 +44,11 @@ export class Provider extends Component {
     };
     before.push(newPerson);
     after.forEach((person) => before.push(person));
-    this.setState((this.state.LeaderBoard = before));
+    this.setState(this.state.LeaderBoard = before);
+
   };
 
+  //testing if reducer is working.
   test = this.state.dispatch({
     name: 'moin',
     score: 60,
