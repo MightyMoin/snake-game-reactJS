@@ -4,6 +4,7 @@ import Snake from './components/Snake';
 import Food from './components/Food';
 import { Provider } from './context';
 import LeaderBoard from './components/LeaderBoard';
+import Popup from './components/Popup';
 
 const box = 32;
 // a function that gives food at a random space
@@ -14,14 +15,14 @@ const randomFood = () => {
   const y = Math.floor(Math.random() * (max - min + 1) + min) * box;
   return [x, y];
 };
-const collision = (head,array) =>{
-  for(let i=0;i<array.length;i++){
-      if(head[0] === array[i][0] && head[1] === array[i][1]){
-          return true;
-      }
+const collision = (head, array) => {
+  for (let i = 0; i < array.length; i++) {
+    if (head[0] === array[i][0] && head[1] === array[i][1]) {
+      return true;
+    }
   }
   return false;
-}
+};
 // this is the initial state of the snake
 const initialState = {
   food: randomFood(),
@@ -37,13 +38,41 @@ const initialState = {
   sound: null,
 };
 
+var intervalFlag = 0;
+var interval = null;
+var flag = 0;
+var inteflg = 1;
+
 class App extends Component {
   state = initialState;
 
   // this runs after the document is ready
   componentDidMount() {
-    setInterval(this.snakeMovement, this.state.speed);
+    var x = document.getElementsByClassName('popup')[0];
+    interval = setInterval(this.snakeMovement, this.state.speed);
+
     document.onkeydown = this.onDirection;
+  }
+
+  shouldComponentUpdate() {
+    if (intervalFlag === 1) {
+      if (flag == 0) {
+        this.setState(initialState);
+        flag = 1;
+        inteflg = 0;
+        this.stopInterval();
+
+      }
+      return false;
+    } else {
+      flag = 0;
+      if(inteflg === 0){
+        this.setState(initialState);
+      interval = setInterval(this.snakeMovement, this.state.speed);
+      inteflg = 1;
+      }
+      return true;
+    }
   }
   // this runs if there is a change in state
   componentDidUpdate() {
@@ -92,6 +121,10 @@ class App extends Component {
       this.sound.play();
       this.setState({ last: 'DOWN' });
     }
+  };
+
+  stopInterval = () => {
+    clearInterval(interval);
   };
 
   //tells the snake to move in a particular directin
@@ -143,7 +176,7 @@ class App extends Component {
     if (head[0] === food[0] && head[1] === food[1]) {
       document.getElementsByClassName('eat')[0].play();
       let foo = randomFood();
-      while(collision(foo,snake)) foo = randomFood();
+      while (collision(foo, snake)) foo = randomFood();
       this.setState({
         food: foo,
         score: this.state.score + 1,
@@ -177,8 +210,16 @@ class App extends Component {
     }
   }
   gameOver() {
-    alert(`Game Over! Score :${this.state.score}`);
+    var x = document.getElementsByClassName('popup')[0];
+    x.style.display = 'flex';
+    intervalFlag = 1;
     this.setState(initialState);
+  }
+  restartGame() {
+    console.log('fired');
+    intervalFlag = 0;
+    // this.shouldComponentUpdate();
+    // this.setState(initialState);
   }
   render() {
     const { snakeDots, food, score } = this.state;
@@ -222,6 +263,11 @@ class App extends Component {
           <audio className="eat">
             <source src={require('./audio/eat.mp3')} type="audio/mp3"></source>
           </audio>
+          <Popup
+            score={this.state.score}
+            intervalFlag={intervalFlag}
+            rsGame={this.restartGame}
+          ></Popup>
         </React.Fragment>
       </Provider>
     );

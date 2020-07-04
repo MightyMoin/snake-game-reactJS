@@ -31,7 +31,7 @@ export class Provider extends Component {
       return person.score >= score;
     });
     const after = this.state.LeaderBoard.filter((person) => {
-      return person.score <= score;
+      return person.score < score;
     });
     let i = before.length + 1;
     after.map((person) => {
