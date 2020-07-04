@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Snake from './components/Snake';
 import Food from './components/Food';
@@ -223,66 +223,71 @@ class App extends Component {
     const { snakeDots, food, score } = this.state;
     const rsGame = this.restartGame;
     return (
-      <Router>
-        <Provider>
-          <React.Fragment>
-            <div className="display-4 text-center">Snake Game</div>
-            <div className="playground">
-              <div className="ground">
-                <h5 className="score">Score: {score}</h5>
-                <div className="snake-playground">
-                  <img
-                    src={require('./img/ground.png')}
-                    alt="img"
-                    className="background"
-                  ></img>
-                  <Snake snakeDots={snakeDots}></Snake>
-                  <Food food={food}></Food>
+      <Provider>
+        <Router>
+          <Route exact path="/">
+            <React.Fragment>
+              <div className="display-4 text-center">Snake Game</div>
+              <div className="playground">
+                <div className="ground">
+                  <h5 className="score">Score: {score}</h5>
+                  <div className="snake-playground">
+                    <img
+                      src={require('./img/ground.png')}
+                      alt="img"
+                      className="background"
+                    ></img>
+                    <Snake snakeDots={snakeDots}></Snake>
+                    <Food food={food}></Food>
+                  </div>
                 </div>
+                <LeaderBoard></LeaderBoard>
               </div>
-              <LeaderBoard></LeaderBoard>
-            </div>
-            <audio className="left">
-              <source
-                src={require('./audio/left.mp3')}
-                type="audio/mp3"
-              ></source>
-            </audio>
-            <audio className="right">
-              <source
-                src={require('./audio/right.mp3')}
-                type="audio/mp3"
-              ></source>
-            </audio>
-            <audio className="up">
-              <source src={require('./audio/up.mp3')} type="audio/mp3"></source>
-            </audio>
-            <audio className="down">
-              <source
-                src={require('./audio/down.mp3')}
-                type="audio/mp3"
-              ></source>
-            </audio>
-            <audio className="dead">
-              <source
-                src={require('./audio/dead.mp3')}
-                type="audio/mp3"
-              ></source>
-            </audio>
-            <audio className="eat">
-              <source
-                src={require('./audio/eat.mp3')}
-                type="audio/mp3"
-              ></source>
-            </audio>
-            <Popup
-              score={score}
-              intervalFlag={intervalFlag}
-              rsGame={rsGame}
-            ></Popup>
-          </React.Fragment>
-        </Provider>
-      </Router>
+              <audio className="left">
+                <source
+                  src={require('./audio/left.mp3')}
+                  type="audio/mp3"
+                ></source>
+              </audio>
+              <audio className="right">
+                <source
+                  src={require('./audio/right.mp3')}
+                  type="audio/mp3"
+                ></source>
+              </audio>
+              <audio className="up">
+                <source
+                  src={require('./audio/up.mp3')}
+                  type="audio/mp3"
+                ></source>
+              </audio>
+              <audio className="down">
+                <source
+                  src={require('./audio/down.mp3')}
+                  type="audio/mp3"
+                ></source>
+              </audio>
+              <audio className="dead">
+                <source
+                  src={require('./audio/dead.mp3')}
+                  type="audio/mp3"
+                ></source>
+              </audio>
+              <audio className="eat">
+                <source
+                  src={require('./audio/eat.mp3')}
+                  type="audio/mp3"
+                ></source>
+              </audio>
+              <Popup
+                score={score}
+                intervalFlag={intervalFlag}
+                rsGame={rsGame}
+              ></Popup>
+            </React.Fragment>
+          </Route>
+        </Router>
+      </Provider>
     );
   }
 }
