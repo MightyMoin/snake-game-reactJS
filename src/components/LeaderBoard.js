@@ -9,6 +9,10 @@ class LeaderBoard extends Component {
         {(value) => {
           const { LeaderBoard } = value;
           return (
+            <div style={{ width: '50%' }} >
+            <div className="container">
+              <h2>Controls:<img className="ml-3" width='80px' src="https://www.pngkit.com/png/full/179-1791596_wasd-keys-png-wasd-keys.png" alt="contollers"/></h2>
+            </div>
             <div className="leaderboard mt-4">
               <div className="card">
                 <div className="card-header text-center display-4">Leaderboard</div>
@@ -34,6 +38,7 @@ class LeaderBoard extends Component {
                   ))}
                 </div>
               </div>
+            </div>
             </div>
           );
         }}

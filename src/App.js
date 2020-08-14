@@ -28,14 +28,14 @@ const collision = (head, array) => {
 // this is the initial state of the snake
 const initialState = {
   food: randomFood(),
-  direction: 'RIGHT',
+  direction: '',
   speed: 200,
   snakeDots: [
     [4 * box, 10 * box],
     [5 * box, 10 * box],
     [6 * box, 10 * box],
   ],
-  last: 'RIGHT',
+  last: '',
   score: 0,
   sound: null,
 };
@@ -131,27 +131,29 @@ class App extends Component {
   snakeMovement = () => {
     let dots = [...this.state.snakeDots];
     let newhead = dots[dots.length - 1];
-    switch (this.state.direction) {
-      case 'RIGHT':
-        newhead = [newhead[0] + box, newhead[1]];
-        break;
-      case 'LEFT':
-        newhead = [newhead[0] - box, newhead[1]];
-        break;
-      case 'UP':
-        newhead = [newhead[0], newhead[1] - box];
-        break;
-      case 'DOWN':
-        newhead = [newhead[0], newhead[1] + box];
-        break;
-      default:
-        break;
+    if (this.state.direction !== '') {
+      switch (this.state.direction) {
+        case 'RIGHT':
+          newhead = [newhead[0] + box, newhead[1]];
+          break;
+        case 'LEFT':
+          newhead = [newhead[0] - box, newhead[1]];
+          break;
+        case 'UP':
+          newhead = [newhead[0], newhead[1] - box];
+          break;
+        case 'DOWN':
+          newhead = [newhead[0], newhead[1] + box];
+          break;
+        default:
+          break;
+      }
+      dots.push(newhead);
+      dots.shift();
+      this.setState({
+        snakeDots: dots,
+      });
     }
-    dots.push(newhead);
-    dots.shift();
-    this.setState({
-      snakeDots: dots,
-    });
   };
   // to enlarge snake
   enlarge() {
@@ -228,7 +230,7 @@ class App extends Component {
           <Route exact path="/">
             <React.Fragment>
               <div className="display-4 text-center">Snake Game</div>
-              <div className="playground">
+              <div className="mt-4 playground">
                 <div className="ground">
                   <h5 className="score">Score: {score}</h5>
                   <div className="snake-playground">

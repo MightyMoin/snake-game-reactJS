@@ -113,8 +113,8 @@ export default class Popup extends Component {
                           ></input>
                           <p>
                             <strong>Note: </strong> After you close this popup
-                            or Submit your details , first press 'W' and then
-                            'D' to restart the Game{' '}
+                            or Submit your details , press any control to
+                            restart the Game{' '}
                           </p>
                         </form>
                       </div>
@@ -135,8 +135,8 @@ export default class Popup extends Component {
                         </button>
                         <p>
                           <strong>Note: </strong> After you close this popup or
-                          pressed "Click Here" button , first press 'W' and then
-                          'D' to restart the Game{' '}
+                          pressed "Click Here" button , press any control to
+                          restart the Game{' '}
                         </p>
                       </div>
                     )}
