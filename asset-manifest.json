@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/snake-game-reactJS/static/css/main.b4e4338e.chunk.css",
-    "main.js": "/snake-game-reactJS/static/js/main.ad3c395a.chunk.js",
-    "main.js.map": "/snake-game-reactJS/static/js/main.ad3c395a.chunk.js.map",
+    "main.css": "/snake-game-reactJS/static/css/main.c3e40b2d.chunk.css",
+    "main.js": "/snake-game-reactJS/static/js/main.3e47e45b.chunk.js",
+    "main.js.map": "/snake-game-reactJS/static/js/main.3e47e45b.chunk.js.map",
     "runtime-main.js": "/snake-game-reactJS/static/js/runtime-main.e6c9f95c.js",
     "runtime-main.js.map": "/snake-game-reactJS/static/js/runtime-main.e6c9f95c.js.map",
-    "static/js/2.015b8eda.chunk.js": "/snake-game-reactJS/static/js/2.015b8eda.chunk.js",
-    "static/js/2.015b8eda.chunk.js.map": "/snake-game-reactJS/static/js/2.015b8eda.chunk.js.map",
+    "static/js/2.8bb60d2d.chunk.js": "/snake-game-reactJS/static/js/2.8bb60d2d.chunk.js",
+    "static/js/2.8bb60d2d.chunk.js.map": "/snake-game-reactJS/static/js/2.8bb60d2d.chunk.js.map",
     "index.html": "/snake-game-reactJS/index.html",
-    "precache-manifest.3273916483ce9dac0607ea89d699e869.js": "/snake-game-reactJS/precache-manifest.3273916483ce9dac0607ea89d699e869.js",
+    "precache-manifest.f5fd7ece3c5cbb2cede87f2448a4be37.js": "/snake-game-reactJS/precache-manifest.f5fd7ece3c5cbb2cede87f2448a4be37.js",
     "service-worker.js": "/snake-game-reactJS/service-worker.js",
-    "static/css/main.b4e4338e.chunk.css.map": "/snake-game-reactJS/static/css/main.b4e4338e.chunk.css.map",
-    "static/js/2.015b8eda.chunk.js.LICENSE.txt": "/snake-game-reactJS/static/js/2.015b8eda.chunk.js.LICENSE.txt",
+    "static/css/main.c3e40b2d.chunk.css.map": "/snake-game-reactJS/static/css/main.c3e40b2d.chunk.css.map",
+    "static/js/2.8bb60d2d.chunk.js.LICENSE.txt": "/snake-game-reactJS/static/js/2.8bb60d2d.chunk.js.LICENSE.txt",
     "static/media/dead.mp3": "/snake-game-reactJS/static/media/dead.f2594749.mp3",
     "static/media/down.mp3": "/snake-game-reactJS/static/media/down.3da54fb7.mp3",
     "static/media/eat.mp3": "/snake-game-reactJS/static/media/eat.ead74d92.mp3",
@@ -23,8 +23,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.e6c9f95c.js",
-    "static/js/2.015b8eda.chunk.js",
-    "static/css/main.b4e4338e.chunk.css",
-    "static/js/main.ad3c395a.chunk.js"
+    "static/js/2.8bb60d2d.chunk.js",
+    "static/css/main.c3e40b2d.chunk.css",
+    "static/js/main.3e47e45b.chunk.js"
   ]
 }
